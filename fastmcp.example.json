@@ -1,7 +1,7 @@
 {
     "$schema": "https://gofastmcp.com/public/schemas/fastmcp.json/v1.json",
     "source": {
-        "path": "server.py",
-        "entrypoint": "mcp"
+        "path": "xray_mcp/server.py",
+        "entrypoint": "create_server"
     }
 }

@@ -15,10 +15,9 @@ RUN apt-get update \
 RUN python -m venv "$VIRTUAL_ENV" \
 	&& "$VIRTUAL_ENV/bin/pip" install --no-cache-dir --upgrade pip uv
 
-# Install deps from pyproject.toml; stub server.py and the package dirs so setuptools doesn't complain.
+# Install deps from pyproject.toml; stub the package dirs so setuptools doesn't complain.
 COPY pyproject.toml LICENSE ./
-RUN touch server.py \
-	&& mkdir -p xray_mcp/toolsets \
+RUN mkdir -p xray_mcp/toolsets \
 	&& touch xray_mcp/__init__.py xray_mcp/toolsets/__init__.py \
 	&& uv pip install --python "$VIRTUAL_ENV/bin/python" -e .
 
@@ -73,4 +72,5 @@ COPY --chown=app:app . .
 USER app
 EXPOSE 8000
 
-CMD ["fastmcp", "run", "server.py:mcp"]
+# stdio by default; FASTMCP_TRANSPORT=http (plus FASTMCP_HOST / FASTMCP_PORT) serves HTTP.
+CMD ["jira-xray-cloud-mcp"]

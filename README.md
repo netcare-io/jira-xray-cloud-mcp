@@ -97,7 +97,8 @@ change the tool list. `xray_list_toolsets` reports what is enabled at runtime.
 XRAY_CLIENT_ID=... XRAY_CLIENT_SECRET=... jira-xray-cloud-mcp
 
 # HTTP, as in docker-compose.yml
-fastmcp run server.py:mcp --transport http --host 0.0.0.0 --port 8000
+FASTMCP_TRANSPORT=http FASTMCP_HOST=0.0.0.0 FASTMCP_PORT=8000 jira-xray-cloud-mcp
+# or: fastmcp run xray_mcp/server.py:create_server --transport http --host 0.0.0.0 --port 8000
 ```
 
 Register it with Claude Code, here locally over stdio, read-only, with a limited set of toolsets:
@@ -123,8 +124,8 @@ Every release is published to `ghcr.io/netcare-io/jira-xray-cloud-mcp` as `<vers
 
 ```bash
 # HTTP, every user brings their own API key
-docker run --rm -p 8000:8000 -e XRAY_AUTH_MODE=headers ghcr.io/netcare-io/jira-xray-cloud-mcp:latest \
-  fastmcp run server.py:mcp --transport http --host 0.0.0.0 --port 8000
+docker run --rm -p 8000:8000 -e XRAY_AUTH_MODE=headers \
+  -e FASTMCP_TRANSPORT=http -e FASTMCP_HOST=0.0.0.0 ghcr.io/netcare-io/jira-xray-cloud-mcp:latest
 
 # stdio, e.g. as the command of a local MCP client
 docker run --rm -i -e XRAY_CLIENT_ID=... -e XRAY_CLIENT_SECRET=... ghcr.io/netcare-io/jira-xray-cloud-mcp:latest
