@@ -2,9 +2,9 @@
 set -euo pipefail
 
 # Builds and pushes the production Docker image for the currently checked
-# out source tree to the internal Harbor registry. Run this after checking
-# out the tag/commit you want to publish (see scripts/release.sh to cut a
-# release first, or scripts/release-and-publish.sh to do both in one step).
+# out source tree to the internal Harbor registry. Release tags are published
+# to GHCR by .github/workflows/release.yml; this is the manual path for Harbor.
+# Run it after checking out the tag you want to publish (see scripts/release.sh).
 #
 # Usage: scripts/docker-build-and-publish.sh [version]
 #   Defaults to the version currently set in pyproject.toml.
