@@ -1,7 +1,13 @@
 # Copyright (c) 2026 netcare GmbH. All rights reserved.
 # SPDX-License-Identifier: MIT
 
-"""Server factory: selects toolsets from the settings and wires up the Xray client."""
+"""Server factory: selects toolsets from the settings and wires up the Xray client.
+
+Entry points: the ``jira-xray-cloud-mcp`` command (``main``) and
+``fastmcp run xray_mcp/server.py:create_server``. Both read the XRAY_* variables
+(see config.py); the transport comes from FASTMCP_TRANSPORT / FASTMCP_HOST / FASTMCP_PORT
+or the ``fastmcp run`` flags.
+"""
 
 from typing import Any
 
@@ -80,3 +86,8 @@ def create_server(
         }
 
     return mcp
+
+
+def main() -> None:
+    """Run the server configured from the environment (stdio unless FASTMCP_TRANSPORT says otherwise)."""
+    create_server().run()

@@ -40,16 +40,15 @@ Repository = "https://github.com/netcare-io/jira-xray-cloud-mcp"
 Issues = "https://github.com/netcare-io/jira-xray-cloud-mcp/issues"
 
 [project.scripts]
-jira-xray-cloud-mcp = "server:main"
+jira-xray-cloud-mcp = "xray_mcp.server:main"
 
 [build-system]
 requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
-# server.py sits at the repo root alongside tests/ and scripts/, which
-# defeats setuptools' flat-layout auto-discovery. Name the module explicitly.
+# tests/ and scripts/ at the repo root defeat setuptools' flat-layout
+# auto-discovery, so name the packages explicitly.
 [tool.setuptools]
-py-modules = ["server"]
 packages = ["xray_mcp", "xray_mcp.toolsets"]
 
 [tool.setuptools.package-data]

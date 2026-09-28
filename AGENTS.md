@@ -14,14 +14,15 @@ come from the environment or per request from HTTP headers (`XRAY_AUTH_MODE`). U
 ## Layout
 
 ```
-server.py                  entrypoint: `mcp = create_server()` (fastmcp.json / docker-compose use server.py:mcp)
 xray_mcp/config.py         Settings (pydantic-settings, env prefix XRAY_)
 xray_mcp/client.py         XrayClient: connection pool, per-key token cache, with_credentials(), REST
                            request(), graphql(), read-only guard, credentials_from_headers(),
                            graphql_operation_types() (detects mutations)
 xray_mcp/registry.py       Toolset / ToolSpec / ToolsetPart (read/write half), select_toolsets(),
                            select_tools() (XRAY_TOOLSETS + XRAY_TOOLS), register_tools()
-xray_mcp/server.py         create_server(settings, transport=None): lifespan with the client, xray_list_toolsets
+xray_mcp/server.py         create_server(settings, transport=None): lifespan with the client, xray_list_toolsets;
+                           main() = the `jira-xray-cloud-mcp` command (Docker CMD). `fastmcp run` / fastmcp.json
+                           use the factory: xray_mcp/server.py:create_server. No server is built at import.
 xray_mcp/toolsets/         one module per toolset, each exporting `toolset`; ALL_TOOLSETS in __init__.py
 xray_mcp/toolsets/_common.py  XRAY dependency (binds header credentials), shared Annotated param types,
                            key->id resolution, search/change helpers, GraphQL selections
@@ -125,7 +126,7 @@ https://github.com/Xray-App/xray-postman-collections, FastMCP https://gofastmcp.
   In-memory clients have no HTTP request, so header credentials are tested with
   `fastmcp.utilities.tests.asgi_client(server, headers=...)` (real HTTP stack, no port), see `tests/test_auth.py`.
 - Check a real start with:
-  `XRAY_READ_ONLY=true fastmcp run server.py:mcp --transport http --port 8765` (first start takes ~5s).
+  `XRAY_READ_ONLY=true fastmcp run xray_mcp/server.py:create_server --transport http --port 8765` (first start takes ~5s).
 
 ## CI and releases
 
@@ -146,7 +147,7 @@ https://github.com/Xray-App/xray-postman-collections, FastMCP https://gofastmcp.
 - **FastMCP 4 is pinned exactly (`fastmcp==4.0.10`).** It uses `httpx2`, not `httpx`. Protocol type
   fields are snake_case (`ToolAnnotations(read_only_hint=...)`, `tool.input_schema`). The default client
   mode is sessionless, so don't rely on `ctx.set_state` persisting between calls.
-- Docker `base` stage installs the package before the sources are copied. It stubs `server.py` and the
+- Docker `base` stage installs the package before the sources are copied. It stubs the
   `xray_mcp/`, `xray_mcp/toolsets/` packages. **New subpackages must be added to that stub and to
   `[tool.setuptools] packages` in pyproject.toml.**
 - Xray GraphQL answers errors with HTTP 200 and `{"errors": [...]}`; `XrayClient.graphql` raises on them.
