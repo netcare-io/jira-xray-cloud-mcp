@@ -1,0 +1,14 @@
+services:
+  jira-xray-cloud-mcp:
+    container_name: jira-xray-cloud-mcp
+    image: jira-xray-cloud-mcp:latest
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+      target: production
+    env_file:
+      - .env
+    command: ["fastmcp", "run", "server.py:mcp", "--transport", "http", "--host", "0.0.0.0", "--port", "8000"]
+    #ports:
+    #  - "8000:8000"
+    restart: unless-stopped

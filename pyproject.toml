@@ -1,0 +1,61 @@
+[project]
+name = "jira-xray-cloud-mcp"
+version = "0.1.0"
+description = "An MCP server exposing Jira Cloud and Xray Cloud as tools"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["mcp", "fastmcp", "jira", "xray", "testing", "llm"]
+authors = [{ name = "netcare GmbH" }]
+
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Testing",
+]
+
+# Pinned exactly: FastMCP 4 has carried breaking changes between releases.
+# Bump deliberately, and run the test suite after.
+dependencies = [
+  "fastmcp==4.0.10",
+  # Both ship with fastmcp; listed because xray_mcp imports them directly.
+  "httpx2>=2.13",
+  "pydantic-settings>=2.15",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9",
+  "pytest-asyncio>=1.4",
+  # Validates every GraphQL document the tools send against the bundled Xray schema.
+  "graphql-core>=3.2",
+]
+
+[project.urls]
+Homepage = "https://netcare.de"
+Repository = "https://github.com/netcare-io/jira-xray-cloud-mcp"
+Issues = "https://github.com/netcare-io/jira-xray-cloud-mcp/issues"
+
+[project.scripts]
+jira-xray-cloud-mcp = "server:main"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+# server.py sits at the repo root alongside tests/ and scripts/, which
+# defeats setuptools' flat-layout auto-discovery. Name the module explicitly.
+[tool.setuptools]
+py-modules = ["server"]
+packages = ["xray_mcp", "xray_mcp.toolsets"]
+
+[tool.setuptools.package-data]
+xray_mcp = ["xray_schema.graphql"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Without this, pytest-asyncio's strict mode ignores unmarked async tests.
+asyncio_mode = "auto"

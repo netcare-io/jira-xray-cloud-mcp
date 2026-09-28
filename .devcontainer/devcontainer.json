@@ -1,0 +1,51 @@
+{
+    "name": "jira-xray-cloud-mcp",
+    "build": {
+        "context": "..",
+        "dockerfile": "Dockerfile",
+        "target": "devcontainer"
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind",
+    "workspaceFolder": "/app",
+    "mounts": [
+        "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind"
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "charliermarsh.ruff",
+                "Anthropic.claude-code"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/venv/bin/python",
+                "python.testing.pytestEnabled": true,
+                "[python]": {
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.formatOnSave": true
+                }
+            }
+        }
+    },
+    "remoteUser": "vscode",
+    "forwardPorts": [
+        6274,
+        6277,
+        8000
+    ],
+    // Lets http://host.docker.internal resolve on plain Linux Docker (e.g. for a
+    // mock server running on the host).
+    //
+    // Env vars are baked into the container itself via the root .env file (not just
+    // the VS Code remote session), so `docker exec` from an MCP client config picks
+    // them up too. Copy .env.example to .env and adjust values before building —
+    // changes require a container rebuild. Not containerEnv: VS Code's
+    // ${localEnv:VAR:default} syntax truncates default values that contain a colon,
+    // which breaks a URL default.
+    "runArgs": [
+        "--name=jira-xray-cloud-mcp-devcontainer",
+        "--add-host=host.docker.internal:host-gateway",
+        "--env-file=${localWorkspaceFolder}/.env"
+    ]
+}

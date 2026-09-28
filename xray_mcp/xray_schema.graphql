@@ -1,0 +1,3215 @@
+# Xray Cloud GraphQL schema, reconstructed from https://us.xray.cloud.getxray.app/doc/graphql/
+
+type ActionFolderResult {
+
+#   Folder updated during the operation.
+folder: SimpleFolderResults 
+
+#   Warning generated during the operation.
+warnings: [String] 
+
+}
+
+type AddDefectsResult {
+
+#   Ids of the added Defects.
+addedDefects: [String] 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation addDefectsToTestRun {
+
+#   Mutation used to add defects to a Test Run.
+# 
+# Arguments
+#   id: the id of the Test Run.
+#   issues: the ids or keys of the defects to add to the Test Run.
+addDefectsToTestRun(id: String!, issues: [String]!): AddDefectsResult 
+
+}
+
+Mutation addDefectsToTestRunStep {
+
+#   Mutation used to add defects to a Test Run Step.
+# 
+# Arguments
+#   testRunId: The id of the Test Run.
+#   stepId: the id of the Test Run Step.
+#   issues: the ids or keys of the defects.
+#   iterationRank: the rank of the iteration.
+addDefectsToTestRunStep(testRunId: String!, stepId: String!, issues: [String], iterationRank: String): AddDefectsResult 
+
+}
+
+type AddEvidenceResult {
+
+#   Ids of the added Evidence.
+addedEvidence: [String] 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation addEvidenceToTestRun {
+
+#   Mutation used to add evidence to a Test Run.
+# 
+# Arguments
+#   id: the id of the Test Run.
+#   evidence: the evidence to add to the Test Run.
+addEvidenceToTestRun(id: String!, evidence: [AttachmentDataInput]!): AddEvidenceResult 
+
+}
+
+Mutation addEvidenceToTestRunStep {
+
+#   Mutation used to add evidence to a Test Run Step.
+# 
+# Arguments
+#   testRunId: The id of the Test Run.
+#   stepId: the id of the Test Run Step.
+#   evidence: the evidence to add to the Test Run Step.
+#   iterationRank: the rank of the iteration.
+addEvidenceToTestRunStep(testRunId: String!, stepId: String!, evidence: [AttachmentDataInput], iterationRank: String): AddEvidenceResult 
+
+}
+
+Mutation addIssuesToFolder {
+
+#   Mutation used to add issues to a Folder.
+# 
+# Arguments
+#   projectId: the project id of the Folder.
+#   path: the path of the Folder.
+#   issueIds: the Test or Precondition ids to add to the Folder.
+#   index: the index of where to insert the Tests in.
+addIssuesToFolder(projectId: String!, path: String!, issueIds: [String]!, index: Int): ActionFolderResult 
+
+}
+
+type AddPreconditionsResult {
+
+#   Issue ids of the added Preconditions.
+addedPreconditions: [String] 
+
+#   Warning generated during the operation.
+warning: String 
+
+}
+
+Mutation addPreconditionsToTest {
+
+#   Mutation used to associate Preconditions to the Test.
+#   Note: The preconditions to be associated with the Test must be of the same Test Type of the Test.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   versionId: the id of a Test version. If not given, will update the default Test version.
+#   preconditionIssueIds: the issue ids of the Preconditions.
+addPreconditionsToTest(issueId: String!, versionId: Int, preconditionIssueIds: [String]!): AddPreconditionsResult 
+
+}
+
+type AddTestEnvironmentsResult {
+
+#   Test Environments that were associated.
+associatedTestEnvironments: [String] 
+
+#   Test Environments that were created.
+createdTestEnvironments: [String] 
+
+#   Warning generated during the operation.
+warning: String 
+
+}
+
+Mutation addTestEnvironmentsToTestExecution {
+
+#   Mutation used to add Test Environments to the Test Execution.
+# 
+# Arguments
+#   issueId: the issue id of the Test Execution.
+#   testEnvironments: the test environments to add.
+addTestEnvironmentsToTestExecution(issueId: String!, testEnvironments: [String]!): AddTestEnvironmentsResult 
+
+}
+
+type AddTestExecutionsResult {
+
+#   Issue ids of the added Test Executions.
+addedTestExecutions: [String] 
+
+#   Warning generated during the operation.
+warning: String 
+
+}
+
+Mutation addTestExecutionsToTest {
+
+#   Mutation used to associate Test Executions to the Test.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   versionId: the id of a Test version. If not given, will update the default Test version.
+#   testExecIssueIds: the issue ids of the Test Executions.
+addTestExecutionsToTest(issueId: String!, versionId: Int, testExecIssueIds: [String]!): AddTestExecutionsResult 
+
+}
+
+Mutation addTestExecutionsToTestPlan {
+
+#   Mutation used to associate Test Executions to the Test Plan.
+# 
+# Arguments
+#   issueId: the issue id of the Test Plan.
+#   testExecIssueIds: the issue ids of the Test Executions.
+addTestExecutionsToTestPlan(issueId: String!, testExecIssueIds: [String]!): AddTestExecutionsResult 
+
+}
+
+type AddTestPlansResult {
+
+#   Issue ids of the added Test Plans.
+addedTestPlans: [String] 
+
+#   Warning generated during the operation.
+warning: String 
+
+}
+
+Mutation addTestPlansToTest {
+
+#   Mutation used to associate Test Plans to the Test.
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   testPlanIssueIds: the issue ids of the Test Plans.
+addTestPlansToTest(issueId: String!, testPlanIssueIds: [String]!): AddTestPlansResult 
+
+}
+
+type AddTestSetsResult {
+
+#   Issue ids of the added Test Set.
+addedTestSets: [String] 
+
+#   Warning generated during the operation.
+warning: String 
+
+}
+
+Mutation addTestSetsToTest {
+
+#   Mutation used to associate Test Sets to the Test.
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   testSetIssueIds: the issue ids of the Test Sets.
+addTestSetsToTest(issueId: String!, testSetIssueIds: [String]!): AddTestSetsResult 
+
+}
+
+type AddTestsResult {
+
+#   Issue Ids of the added Tests.
+addedTests: [String] 
+
+#   Warning generated during the operation.
+warning: String 
+
+}
+
+Mutation addTestStep {
+
+#   Mutation used to add a Step to a Test.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   versionId: the id of a Test version. If not given, will update the default Test version.
+#   step: the Step to add to the Test.
+addTestStep(issueId: String!, versionId: Int, step: CreateStepInput!): Step 
+
+}
+
+Mutation addTestsToFolder {
+
+#   Mutation used to add tests to a Folder.
+# 
+# Arguments
+#   projectId: the project id of the Folder.
+#   testPlanId: the Test Plan id of the Folder.
+#   path: the path of the Folder.
+#   testIssueIds: the Test ids to add to the Folder.
+#   index: the index of where to insert the Tests in.
+addTestsToFolder(projectId: String, testPlanId: String, path: String!, testIssueIds: [String]!, index: Int): ActionFolderResult 
+
+}
+
+Mutation addTestsToPrecondition {
+
+#   Mutation used to associate Tests to the Precondition. One of testIssueIds or tests is required.
+#   Note: The Tests to be associated with the Precondition must be of the same Test Type of the Precondition.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Precondition.
+#   testIssueIds: the issue ids of the Tests. Will associate the default Test versions. Cannot be used with tests.
+#   tests: the ids of the Test versions.  Cannot be used with testIssueIds.
+addTestsToPrecondition(issueId: String!, testIssueIds: [String], tests: [TestWithVersionInput]): AddTestsResult 
+
+}
+
+Mutation addTestsToTestExecution {
+
+#   Mutation used to associate Tests to the Test Execution. One of testIssueIds or tests is required.
+# 
+# Arguments
+#   issueId: the issue id of the Test Execution.
+#   testIssueIds: the ids of the Tests. Will associate the default Test versions. Cannot be used with tests.
+#   tests: the ids of the Test versions. Cannot be used with testIssueIds.
+addTestsToTestExecution(issueId: String!, testIssueIds: [String], tests: [TestWithVersionInput]): AddTestsResult 
+
+}
+
+Mutation addTestsToTestPlan {
+
+#   Mutation used to associate Tests to the Test Plan.
+# 
+# Arguments
+#   issueId: the issue id of the Test Plan.
+#   testIssueIds: the issue ids of the Tests.
+addTestsToTestPlan(issueId: String!, testIssueIds: [String]!): AddTestsResult 
+
+}
+
+Mutation addTestsToTestSet {
+
+#   Mutation used to associate Tests to the Test Set.
+# 
+# Arguments
+#   issueId: the issue id of the Test Set.
+#   testIssueIds: the issue ids of the Tests.
+addTestsToTestSet(issueId: String!, testIssueIds: [String]!): AddTestsResult 
+
+}
+
+type Attachment {
+
+#   Id of the attachment.
+id: String 
+
+#   Filename of the attachment.
+filename: String 
+
+#   If the file is stored in Jira.
+storedInJira: Boolean 
+
+#   Download link of the attachment.
+downloadLink: String 
+
+}
+
+input AttachmentDataInput {
+2#    A valid AttachmentDataInput must have the properties filename, mimeType and data defined.
+#   In alternative, the attachmentId property can be used alone.
+#   If both attachmentId and other properties are defined, attachmentId takes precedence and will be used as if it was defined alone.
+# 
+# 
+#   Filename of the attachment.
+filename: String
+10#   Content Type of the attachment.
+mimeType: String
+13#   Data of the attachment. Base64 format.
+data: String
+16#   Id of an attachment.
+attachmentId: String
+}
+
+input AttachmentInput {
+2#   Filename of the attachment.
+filename: String
+5#   Content Type of the attachment.
+mimeType: String
+8#   Data of the attachment. This data should be in base64.
+data: String
+}
+
+input AttachmentOperationsInput {
+2#   Attachments to add to the Step.
+add: [AttachmentInput]
+5#   Ids of the attachments to remove from the Step.
+removeIds: [String]
+8#   Filenames of the attachments to remove from the Step.
+removeFilenames: [String]
+}
+
+type BDDLibraryInfo {
+
+#   Id of the library.
+id: String 
+
+#   Name of the library (only set for global libraries).
+name: String 
+
+#   Whether this is a global library.
+isGlobal: Boolean 
+
+#   Project ids linked to this library.
+projectIds: [String] 
+
+}
+
+type BDDStepLibraryResults {
+
+#   Total amount of steps.
+total: Int 
+
+#   The index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   The maximum amount of steps to be returned.
+limit: Int 
+
+#   BDD step library results.
+results: [BDDStepLibraryStep] 
+
+}
+
+type BDDStepLibraryStep {
+
+#   Id of the step.
+id: String 
+
+#   Step definition text.
+definition: String 
+
+#   Description of the step.
+description: String 
+
+#   Library this step belongs to.
+library: BDDLibraryInfo 
+
+#   Labels of the step.
+labels: [String] 
+
+#   Date when the step was last modified.
+lastModified: String 
+
+#   Test issues that use this step.
+associatedTests: [String] 
+
+}
+
+scalar Boolean
+
+type CallTestParameterAssignment {
+
+#   Name of the parameter.
+parameter: String 
+
+#   Value of the parameter from the called test overridden dataset.
+value: String 
+
+}
+
+type Changes {
+
+#   Field the change refers to.
+field: String 
+
+#   Change details.
+change: String 
+
+}
+
+directive @cost(complexity: Int!, multipliers: [String!], useMultipliers: Boolean) on FIELD_DEFINITION
+
+type CoverableIssue {
+
+issueId: String 
+
+# Arguments
+#   issueIds: [Not documented]
+#   limit: [Not documented]
+#   start: [Not documented]
+tests(issueIds: [String], limit: Int!, start: Int): TestResults 
+
+# Arguments
+#   fields: [Not documented]
+jira(fields: [String]): JSON! 
+
+# Arguments
+#   environment: [Not documented]
+#   isFinal: [Not documented]
+#   version: [Not documented]
+#   testPlan: [Not documented]
+status(environment: String, isFinal: Boolean, version: String, testPlan: String): CoverageStatus 
+
+}
+
+type CoverableIssueResults {
+
+#   Total amount of issues.
+total: Int 
+
+#   The index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   The maximum amount of Coverable Issues to be returned. The maximum is 100.
+limit: Int 
+
+#   Test issue results.
+results: [CoverableIssue] 
+
+#   Warnings generated if you have a invalid Coverable Issue
+warnings: [String] 
+
+}
+
+type CoverageStatus {
+
+name: String 
+
+description: String 
+
+color: String 
+
+}
+
+Mutation createFolder {
+
+#   Mutation used to create a new Folder.
+# 
+# 
+# 
+# Arguments
+#   projectId: the project id of the Folder.
+#   testPlanId: the Test Plan id of the Folder.
+#   path: the path of the Folder.
+#   testIssueIds: the Test ids to add to the Folder.
+#   issueIds: the Test or Precondition ids to add to the Folder.
+createFolder(projectId: String, testPlanId: String, path: String!, testIssueIds: [String], issueIds: [String]): ActionFolderResult 
+
+}
+
+Mutation createPrecondition {
+
+#   Mutation used to create a new Precondition.
+# 
+# Arguments
+#   preconditionType: the Precondition Type of the Precondition issue.
+#   definition: the definition of the Precondition issue.
+#   testIssueIds: the Test issue ids to be associated with the Precondition issue. Will associate the default Test versions. Cannot be used with tests.
+#   tests: the Test versions to be associated with the Precondition. Cannot be used with testIssueIds.
+#   folderPath: the Test repository folder for the Precondition.
+#   jira: the jira object that will be used to create the Precondition.
+#   Check this Jira endpoint for more information related with this field.
+createPrecondition(preconditionType: UpdatePreconditionTypeInput, definition: String, testIssueIds: [String], tests: [TestWithVersionInput], folderPath: String, jira: JSON!): CreatePreconditionResult 
+
+}
+
+type CreatePreconditionResult {
+
+#   Precondition that was created.
+precondition: Precondition 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+input CreateStepInput {
+2#   Action of the Step.
+action: String
+5#   Data of the Step.
+data: String
+8#   Result of the Step.
+result: String
+11#   Attachments of the Step.
+attachments: [AttachmentInput]
+14#   Custom Fields of the Step
+customFields: [CustomStepFieldInput]
+17#   The issue id of the test called by the step.
+callTestIssueId: String
+}
+
+Mutation createTest {
+
+#   Mutation used to create a new Test.
+#  
+# 
+# Arguments
+#   testType: the Test Type of the Test.
+#   steps: the Step definition of the test.
+#   unstructured: the unstructured definition of the Test.
+#   gherkin: the gherkin definition of the Test.
+#   preconditionIssueIds: the Precondition ids that be associated with the Test.
+#   folderPath: the Test repository folder for the Test.
+#   jira: the Jira object that will be used to create the Test.
+#   Check this Jira endpoint for more information related with this field.
+createTest(testType: UpdateTestTypeInput, steps: [CreateStepInput], unstructured: String, gherkin: String, preconditionIssueIds: [String], folderPath: String, jira: JSON!): CreateTestResult 
+
+}
+
+Mutation createTestExecution {
+
+#   Mutation used to create a new Test Execution.
+# 
+# Arguments
+#   testIssueIds: the test issue ids that will be associated with the Test Execution. Cannot be used with tests.
+#   tests: the Test versions to be associated with the Test Execution. Cannot be used with testIssueIds.
+#   testEnvironments: the test environments to be added to the Test Execution.
+#   jira: the Jira object that will be used to create the Test Execution.
+#   Check this Jira endpoint for more information related with this field.
+createTestExecution(testIssueIds: [String], tests: [TestWithVersionInput], testEnvironments: [String], jira: JSON!): CreateTestExecutionResult 
+
+}
+
+type CreateTestExecutionResult {
+
+#   Test Execution that was created.
+testExecution: TestExecution 
+
+#   Test Environments that were created.
+createdTestEnvironments: [String] 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation createTestPlan {
+
+#   Mutation used to create a new Test Plan.
+# 
+# Arguments
+#   savedFilter: the saved filter id or name that will be used to configure the Test Plan. Cannot be used with testIssueIds.
+#   testIssueIds: the test issue ids that will be associated with the Test Plan. Cannot be used with savedFilter.
+#   jira: the Jira object that will be used to create the Test Plan.
+#   Check this Jira endpoint for more information related with this field.
+createTestPlan(savedFilter: String, testIssueIds: [String], jira: JSON!): CreateTestPlanResult 
+
+}
+
+type CreateTestPlanResult {
+
+#   Test Plan that was created.
+testPlan: TestPlan 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+type CreateTestResult {
+
+#   Test that was created.
+test: Test 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation createTestSet {
+
+#   Mutation used to create a new Test Set.
+# 
+# Arguments
+#   testIssueIds: the Test ids that will be associated with the Test Set.
+#   jira: the Jira object that will be used to create the Test Set.
+#   Check this Jira endpoint for more information related with this field.
+createTestSet(testIssueIds: [String], jira: JSON!): CreateTestSetResult 
+
+}
+
+type CreateTestSetResult {
+
+#   Test Set that was created.
+testSet: TestSet 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+input CustomFieldInput {
+2#   Id of the custom field.
+id: String
+5#   Value of the custom field.
+value: JSON
+}
+
+type CustomStepField {
+
+#   Id of the Custom Field.
+id: String 
+
+#   Name of the Custom Field.
+name: String 
+
+#   Value of the Custom Field.
+value: JSON 
+
+}
+
+input CustomStepFieldInput {
+2#   Id of the Custom Field.
+id: String
+5#   value of the Custom Field.
+value: JSON
+}
+
+type Dataset {
+
+#   Unique identifier of the Dataset.
+id: String 
+
+#   The ID of the test issue associated with the Dataset.
+testIssueId: String 
+
+#   The ID of the test execution issue associated with the Dataset.
+testExecIssueId: String 
+
+#   The ID of the test plan issue associated with the Dataset.
+testPlanIssueId: String 
+
+#   The ID of the test step associated with the Dataset (only for test step datasets).
+testStepId: String 
+
+#   The ID of the call test issue (only for test step datasets).
+callTestIssueId: String 
+
+#   Parameters of the Dataset, represented as an array of key-value pairs.
+parameters: [Parameter] 
+
+#   The rows of the Dataset, representing combinatorial data.
+rows: [DatasetRow] 
+
+}
+
+type DatasetRow {
+
+#   The order of the row in the Dataset.
+order: Int 
+
+#   The values of the row, stored String array.
+Values: [String] 
+
+}
+
+Mutation deleteFolder {
+
+#   Mutation used to delete a Folder.
+# 
+# Arguments
+#   projectId: the project id of the Folder.
+#   testPlanId: the Test Plan id of the Folder.
+#   path: the path of the Folder.
+deleteFolder(projectId: String, testPlanId: String, path: String!): String 
+
+}
+
+Mutation deletePrecondition {
+
+#   Mutation used to delete a Precondition
+# 
+# Arguments
+#   issueId: the issue id of the Precondition.
+deletePrecondition(issueId: String!): String 
+
+}
+
+Mutation deleteTest {
+
+#   Mutation used to delete a Test.
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+deleteTest(issueId: String!): String 
+
+}
+
+Mutation deleteTestExecution {
+
+#   Mutation used to delete a Test Execution.
+# 
+# Arguments
+#   issueId: the issue id of the Test Execution.
+deleteTestExecution(issueId: String!): String 
+
+}
+
+Mutation deleteTestPlan {
+
+#   Mutation used to delete a Test Plan.
+# 
+# Arguments
+#   issueId: issue id of the Test Plan.
+deleteTestPlan(issueId: String!): String 
+
+}
+
+Mutation deleteTestSet {
+
+#   Mutation used to delete a Test Set
+# 
+# Arguments
+#   issueId: The issue id of the Test Set.
+deleteTestSet(issueId: String!): String 
+
+}
+
+directive @deprecated(reason: String) on FIELD_DEFINITION | ENUM_VALUE
+
+type Evidence {
+
+#   Id of the Evidence.
+id: String 
+
+#   Filename of the Evidence.
+filename: String 
+
+#   If file is stored in Jira
+storedInJira: Boolean 
+
+#   Download link of the Evidence.
+downloadLink: String 
+
+#   File size in bytes.
+size: Int 
+
+#   Evidence creation timestamp.
+createdOn: String 
+
+}
+
+type Example {
+
+#   Id of the Example.
+id: String 
+
+#   Status of the Example.
+status: StepStatus 
+
+#   Duration of the Example.
+duration: Float 
+
+}
+
+type ExpandedStep {
+
+#   Id of the Step.
+id: String 
+
+#   Id of the Lib Step Library
+libStepId: String 
+
+#   Action of the Step.
+action: String 
+
+#   Data of the Step.
+data: String 
+
+#   Result of the Step.
+result: String 
+
+#   Attachments of the Step.
+attachments: [Attachment] 
+
+#   Custom Fields of the Step.
+customFields: [CustomStepField] 
+
+#   The issue id of the called test with the step
+calledTestIssueId: String 
+
+#   The issue id of the test calling the step
+parentTestIssueId: String 
+
+}
+
+type ExpandedTest {
+
+#   Issue id of the Test issue.
+issueId: String 
+
+#   Version id of the Test issue.
+versionId: Int 
+
+#   Project id of the Test issue.
+projectId: String 
+
+#   Test type of the Test issue.
+testType: TestType 
+
+#   Unstructured definition of the Test issue.
+unstructured: String 
+
+#   Gherkin definition of the Test issue.
+gherkin: String 
+
+#   Test Repository folder of the Test.
+folder: Folder 
+
+#   Dataset linked to the Test issue.
+dataset: Dataset 
+
+#   Gherkin type of the Test issue.
+#   Possible values: 'scenario' or 'scenario_outline'.
+scenarioType: String 
+
+#   List of Precondition associated with the Test issue.
+# 
+# Arguments
+#   issueIds: the ids of the Preconditions.
+#   limit: the maximum amount of Preconditions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+preconditions(issueIds: [String], limit: Int!, start: Int): PreconditionResults 
+
+#   List of Test Sets associated with the Test issue.
+# 
+# Arguments
+#   issueIds: the issue ids of the Test Sets
+#   limit: the maximum amount of Test Sets to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testSets(issueIds: [String], limit: Int!, start: Int): TestSetResults 
+
+#   List of Test Plans associated with the Test issue.
+# 
+# Arguments
+#   issueIds: the issue ids of the Test Plans
+#   limit: the maximum amount of Test Plans to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testPlans(issueIds: [String], limit: Int!, start: Int): TestPlanResults 
+
+#   List of Test Executions associated with the Test issue.
+# 
+# Arguments
+#   issueIds: the issue ids of the Test Executions
+#   limit: the maximum amount of Test Executions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testExecutions(issueIds: [String], limit: Int!, start: Int): TestExecutionResults 
+
+#   List of Test Runs for the Test issue
+# 
+# Arguments
+#   limit: the maximum amount of Test Runs to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testRuns(limit: Int!, start: Int): TestRunResults 
+
+#   List of Test versions of the Test
+# 
+# Arguments
+#   limit: the maximum amount of Test versions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   archived: if should include archived Test versions in the result.
+#   testTypeId: to filter Test versions by Test Type
+testVersions(limit: Int!, start: Int, archived: Boolean, testTypeId: String): TestVersionResults 
+
+#   List of Xray History results for the issue
+# 
+# Arguments
+#   limit: the maximum amount of entries to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+history(limit: Int!, start: Int): XrayHistoryResults 
+
+#   List of Coverable Issues associated with the Test issue
+# 
+# Arguments
+#   issueIds: the issue ids of the Coverable Issues
+#   limit: the maximum amount of Coverable Issues to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+coverableIssues(issueIds: [String], limit: Int!, start: Int): CoverableIssueResults 
+
+#   Extra Jira information of the Test issue.
+# 
+# Arguments
+#   fields: List of the fields to be displayed.
+#   Check the field 'fields' of this Jira endpoint for more information.
+jira(fields: [String]): JSON! 
+
+#   Status of the Test. This status can be calculated based on latest status, version or Test Plan.
+# 
+# Arguments
+#   environment: the environment for which to calculate the for status.
+#   isFinal: whether the final statuses has precedence over non-final.
+#   version: the version name for which to calculate the status for.
+#   testPlan: the Test Plan id for which to calculate the status for.
+status(environment: String, isFinal: Boolean, version: String, testPlan: String): TestStatusType 
+
+#   Date when the test was last modified.
+lastModified: String 
+
+#   Expanded step definition of the test.
+steps: [ExpandedStep] 
+
+#   Warnings generated while expanding the test steps.
+warnings: [String] 
+
+}
+
+type ExpandedTestResults {
+
+#   Total amount of issues.
+total: Int 
+
+#   The index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   The maximum amount of Tests to be returned. The maximum is 100.
+limit: Int 
+
+#   Expanded test issue results.
+results: [ExpandedTest] 
+
+}
+
+scalar Float
+
+type Folder {
+
+#   Folder name
+name: String 
+
+#   Folder path
+path: String 
+
+}
+
+type FolderResults {
+
+#   Folder name
+name: String 
+
+#   Folder path
+path: String 
+
+#   Folder issues count
+issuesCount: Int 
+
+#   Folder tests count
+testsCount: Int 
+
+#   Folder preconditions count
+preconditionsCount: Int 
+
+#   Folder children
+folders: JSON 
+
+}
+
+input FolderSearchInput {
+2#   Path of the Folder.
+path: String!
+5#   Test Plan id of the Folder.
+testPlanId: String
+8#   Whether descendant folders should be included in the search.
+includeDescendants: Boolean
+}
+
+Query getBDDStepLibrary {
+
+#   Get BDD Step Library steps with optional text search.
+#   Either projectId or testIssueId must be provided.
+# 
+# Arguments
+#   projectId: The project id. Either this or testIssueId must be provided.
+#   search: Search text to match against step definition.
+#   testIssueId: Filter steps linked to a specific test issue. Either this or projectId must be provided.
+#   limit: The maximum amount of steps to be returned. The maximum is 100.
+#   start: The index of the first item to return in the page of results (page offset).
+getBDDStepLibrary(projectId: String, search: String, testIssueId: String, limit: Int!, start: Int): BDDStepLibraryResults 
+
+}
+
+Query getCoverableIssue {
+
+#   Returns a Coverable Issue by issueId.
+# 
+# 
+# Arguments
+#   issueId: the id of the Coverable Issue to be returned.
+getCoverableIssue(issueId: String!): CoverableIssue 
+
+}
+
+Query getCoverableIssues {
+
+#   Returns multiple coverable issues by jql or issue ids.
+# 
+# Arguments
+#   jql: the jql that defines the search.
+#   issueIds: the ids of the Coverable Issues to be returned.
+#   limit: the maximum amount of Tests to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+getCoverableIssues(jql: String, issueIds: [String], limit: Int!, start: Int): CoverableIssueResults 
+
+}
+
+Query getDataset {
+
+#   Returns a Dataset by its testIssueId.
+# 
+# Arguments
+#   testIssueId: The unique identifier of the Dataset to be returned.
+#   testExecIssueId: (Optional) The unique identifier of the Test Execution.
+#   testPlanIssueId: (Optional) The unique identifier of the Test Plan.
+#   callTestIssueId: (Optional) The unique identifier of the Test Call.
+getDataset(testIssueId: String!, testExecIssueId: String, testPlanIssueId: String, callTestIssueId: String): Dataset 
+
+}
+
+Query getDatasets {
+
+#   Returns multiple Datasets based on optional filters.
+# 
+# Arguments
+#   testIssueIds: Filter by test issue IDs.
+#   testExecIssueIds: (Optional) Filter by Test ExecutionIds.
+#   testPlanIssueIds: (Optional) Filter by Test PlanIds.
+getDatasets(testIssueIds: [String], testExecIssueIds: [String], testPlanIssueIds: [String]): [Dataset] 
+
+}
+
+Query getExpandedTest {
+
+#   Returns a test (with the call test steps expanded) by issue id and version id.
+# 
+# Arguments
+#   issueId: the id of the test issue to be returned.
+#   versionId: the id of a Test version. If not given, will get the default Test version.
+getExpandedTest(issueId: String!, versionId: Int): ExpandedTest 
+
+}
+
+Query getExpandedTests {
+
+#   Returns multiple tests (with the call test steps expanded) by jql, issue ids, project id or test type.
+# 
+# 
+# 
+# Arguments
+#   jql: the jql that defines the search.
+#   issueIds: the ids of the Test issues with default Test versions to be returned. Cannot be used with tests.
+#   tests: the ids of the Test versions and Tests. If not given Test Version, will get the default Test version. Cannot be used with issueIds.
+#   projectId: the id of the project of the Test issues to be returned.
+#   testType: the Test Type of the Test issues to be returned.
+#   modifiedSince: all tests modified after this date will be returned
+#   limit: the maximum amount of Tests to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   folder: the folder information required to filter the Test issues to be returned.
+getExpandedTests(
+jql: String,
+issueIds: [String],
+tests: [TestWithVersionInput],
+projectId: String,
+testType: TestTypeInput,
+modifiedSince: String,
+limit: Int!,
+start: Int,
+folder: FolderSearchInput
+): ExpandedTestResults 
+
+}
+
+Query getFolder {
+
+#   Returns the folder for the given projectId with the specified Path along with its child folders.
+# 
+# 
+# Arguments
+#   projectId: the project id of the Folder.
+#   testPlanId: the Test Plan id of the Folder.
+#   path: the path of the Folder.
+getFolder(projectId: String, testPlanId: String, path: String!): FolderResults 
+
+}
+
+Query getIssueLinkTypes {
+
+#   Returns the Issue Link Types
+getIssueLinkTypes: [IssueLinkType] 
+
+}
+
+Query getManualStepLibrary {
+
+#   Get Manual Step Library steps with optional text search.
+#   Either projectId or testIssueId must be provided.
+# 
+# Arguments
+#   projectId: The project id. Either this or testIssueId must be provided.
+#   search: Search text to match against step fields (action, data, result, description, labels).
+#   testIssueId: Filter steps linked to a specific test issue. Either this or projectId must be provided.
+#   limit: The maximum amount of steps to be returned. The maximum is 100.
+#   start: The index of the first item to return in the page of results (page offset).
+getManualStepLibrary(projectId: String, search: String, testIssueId: String, limit: Int!, start: Int): ManualStepLibraryResults 
+
+}
+
+Query getPrecondition {
+
+#   Returns a Precondition by issue id.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Precondition to be returned.
+getPrecondition(issueId: String): Precondition 
+
+}
+
+Query getPreconditions {
+
+#   Returns multiple Preconditions by jql, issueIds, projectId or Precondition Type.
+# 
+# 
+# Arguments
+#   jql: the jql that defines the search.
+#   issueIds: the ids of the Precondition issues to be returned.
+#   projectId: the id of the project of the Precondition issues to be returned.
+#   preconditionType: the Precondition Type of the Precondition issues to be returned.
+#   limit: the maximum amount of Preconditions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   modifiedSince: all Preconditions modified after this date will be returned
+#   folder: the folder information required to filter the Test issues to be returned.
+getPreconditions(
+jql: String,
+issueIds: [String],
+projectId: String,
+preconditionType: TestTypeInput,
+limit: Int!,
+start: Int,
+modifiedSince: String,
+folder: PreconditionFolderSearchInput
+): PreconditionResults 
+
+}
+
+Query getProjectSettings {
+
+#   Returns the Project Settings of a Project.
+# 
+# Arguments
+#   projectIdOrKey: Project Id
+getProjectSettings(projectIdOrKey: String): ProjectSettings 
+
+}
+
+Query getProjectsSettings {
+
+#   Returns the Project Settings of multiple Projects.
+# 
+# Arguments
+#   projectIdsOrKeys: Project Ids or Keys
+#   limit: the maximum amount of Project Settings to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+getProjectsSettings(projectIdsOrKeys: [String], limit: Int!, start: Int): ProjectsSettingsResults 
+
+}
+
+Query getStatus {
+
+#   Returns a Status by Test Run Status name.
+# 
+# Arguments
+#   name: the status name of Test Run Status
+getStatus(name: String): Status 
+
+}
+
+Query getStatuses {
+
+#   Returns all Test Run Status.
+# 
+# Arguments
+#   projectId: the project id to get statuses for. If not provided, returns global statuses
+getStatuses(projectId: String): [Status] 
+
+}
+
+Query getStepStatus {
+
+#   Returns a Status by Test Run Step Status name.
+# 
+# Arguments
+#   name: the status name of test run step status
+getStepStatus(name: String): StepStatus 
+
+}
+
+Query getStepStatuses {
+
+#   Returns all Test Run Step Status.
+# 
+# Arguments
+#   projectId: the project id to get step statuses for. If not provided, returns global step statuses
+getStepStatuses(projectId: String): [StepStatus] 
+
+}
+
+Query getTest {
+
+#   Returns a Test by issueId.
+# 
+# 
+# Arguments
+#   issueId: the id of the Test issue to be returned.
+getTest(issueId: String): Test 
+
+}
+
+Query getTestExecution {
+
+#   Returns a Test Execution by issue id.
+# 
+# 
+# Arguments
+#   issueId: the id of the Test Execution issue to be returned.
+getTestExecution(issueId: String): TestExecution 
+
+}
+
+Query getTestExecutions {
+
+#   Returns multiple Test Executions by jql, issue ids or project id.
+# 
+# 
+# Arguments
+#   jql: the jql that defines the search.
+#   issueIds: the ids of the Test Executions issues to be returned.
+#   projectId: the id of the project of the Test Execution issues to be returned.
+#   limit: the maximum amount of Test Executions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   modifiedSince: all Test Executions modified after this date will be returned
+getTestExecutions(jql: String, issueIds: [String], projectId: String, limit: Int!, start: Int, modifiedSince: String): TestExecutionResults 
+
+}
+
+Query getTestPlan {
+
+#   Returns a Test Plan by issue id.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Test Plan issue to be returned.
+getTestPlan(issueId: String): TestPlan 
+
+}
+
+Query getTestPlans {
+
+#   Returns multiple Test Plans by jql, issue ids or project id.
+# 
+# 
+# Arguments
+#   jql: the jql that defines the search.
+#   issueIds: the ids of the Test Plan issues to be returned.
+#   projectId: the id of the project of the Test Plan issues to be returned.
+#   limit: the maximum amount of Test Plans to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   modifiedSince: all Test Plans modified after this date will be returned
+getTestPlans(jql: String, issueIds: [String], projectId: String, limit: Int!, start: Int, modifiedSince: String): TestPlanResults 
+
+}
+
+Query getTestRun {
+
+#   Returns a Test Run by Test issue id and Test Execution issue id.
+# 
+# Arguments
+#   testIssueId: the issue id of the Test of the Test Run.
+#   testExecIssueId: the issue id of the Test Execution of the Test Run.
+getTestRun(testIssueId: String, testExecIssueId: String): TestRun 
+
+}
+
+Query getTestRunById {
+
+#   Returns a Test Run by id.
+# 
+# Arguments
+#   id: the id of the Test Run.
+getTestRunById(id: String): TestRun 
+
+}
+
+Query getTestRuns {
+
+#   Returns multiple Test Runs testIssueIds and/or testExecIssueIds.
+#  
+# 
+# Arguments
+#   testIssueIds: the issue ids of the Test of the Test Runs.
+#   testExecIssueIds: the issue ids of the Test Execution of the Test Runs.
+#   testRunAssignees: the user account ids of the assignee of the Test Runs.
+#   statuses: the status ids of the Test Runs (e.g. PASSED, FAILED, TODO, EXECUTING, or custom status id).
+#   testPlanIssueIds: the issue ids of the Test Plans whose Test Runs should be returned.
+#   limit: the maximum amount of Test Runs to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   modifiedSince: all TestRuns modified after this date will be returned
+getTestRuns(testIssueIds: [String], testExecIssueIds: [String], testRunAssignees: [String], statuses: [String], testPlanIssueIds: [String], limit: Int!, start: Int, modifiedSince: String): TestRunResults 
+
+}
+
+Query getTestRunsById {
+
+#   Returns multiple Test Runs by id.
+# 
+# Arguments
+#   ids: the ids of the Test Runs.
+#   limit: the maximum amount of Test Runs to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+getTestRunsById(ids: [String], limit: Int!, start: Int): TestRunResults 
+
+}
+
+Query getTests {
+
+#   Returns multiple tests by jql, issue ids, project id or test type.
+# 
+# 
+# Arguments
+#   jql: the jql that defines the search.
+#   issueIds: the ids of the Test issues to be returned.
+#   projectId: the id of the project of the Test issues to be returned.
+#   testType: the Test Type of the Test issues to be returned.
+#   modifiedSince: all tests modified after this date will be returned
+#   limit: the maximum amount of Tests to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   folder: the folder information required to filter the Test issues to be returned.
+getTests(jql: String, issueIds: [String], projectId: String, testType: TestTypeInput, modifiedSince: String, limit: Int!, start: Int, folder: FolderSearchInput): TestResults 
+
+}
+
+Query getTestSet {
+
+#   Returns a Test Set by issueId
+# 
+# 
+# Arguments
+#   issueId: the id of the Test Set issue to be returned.
+getTestSet(issueId: String): TestSet 
+
+}
+
+Query getTestSets {
+
+#   Returns multiple Test Sets by jql, issueIds or projectId.
+# 
+# 
+# Arguments
+#   jql: the jql that defines the search.
+#   issueIds: the ids of the Test Set issues to be returned.
+#   projectId: the id of the project of the Test Set issues to be returned.
+#   limit: the maximum amount of Test Sets to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   modifiedSince: all test sets modified after this date will be returned
+getTestSets(jql: String, issueIds: [String], projectId: String, limit: Int!, start: Int, modifiedSince: String): TestSetResults 
+
+}
+
+directive @include(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+scalar Int
+
+type IssueLinkType {
+
+#   Name of Issue Link Type
+name: String 
+
+#   Id of Issue Link Type
+id: String 
+
+}
+
+scalar JSON
+
+type ManualStepLibraryResults {
+
+#   Total amount of steps.
+total: Int 
+
+#   The index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   The maximum amount of steps to be returned.
+limit: Int 
+
+#   Manual step library results.
+results: [ManualStepLibraryStep] 
+
+}
+
+type ManualStepLibraryStep {
+
+#   Id of the step.
+id: String 
+
+#   Project id the step belongs to.
+projectId: String 
+
+#   Action of the step.
+action: String 
+
+#   Data of the step.
+data: String 
+
+#   Result of the step.
+result: String 
+
+#   Description of the step.
+description: String 
+
+#   Labels of the step.
+labels: [String] 
+
+#   Custom Fields of the step.
+customFields: [CustomStepField] 
+
+#   Test issues that use this step.
+associatedTests: [String] 
+
+#   Date when the step was last modified.
+dateModified: String 
+
+}
+
+Mutation moveFolder {
+
+#   Mutation used to move a Folder.
+# 
+# Arguments
+#   projectId: the project id of the Folder.
+#   testPlanId: the Test Plan id of the Folder.
+#   path: the path of the Folder.
+#   destinationPath: the new path of the Folder.
+#   index: the index of where to insert the folder in.
+moveFolder(projectId: String, testPlanId: String, path: String!, destinationPath: String!, index: Int): ActionFolderResult 
+
+}
+
+type Parameter {
+
+#   The name of the parameter.
+name: String 
+
+#   The type of the parameter.
+type: String 
+
+#   The ID of the project list associated with the parameter.
+projectListId: String 
+
+#   Indicates whether the parameter supports combinations.
+combinations: Boolean 
+
+#   The list of values for the parameter.
+listValues: [String] 
+
+}
+
+type Precondition {
+
+#   Id of the Precondition issue.
+issueId: String 
+
+#   Project id of the Precondition issue.
+projectId: String 
+
+#   Precondition Type of the Precondition issue.
+preconditionType: TestType 
+
+#   Definition of the Precondition issue.
+definition: String 
+
+#   List of the Tests associated with the Precondition issue.
+# 
+# Arguments
+#   issueIds: the issue ids of the Tests.
+#   limit: the maximum amount of Tests to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+tests(issueIds: [String], limit: Int!, start: Int): TestResults 
+
+#   List of the Test versions associated with the Precondition issue.
+# 
+# Arguments
+#   limit: the maximum amount of Test versions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   archived: if should include archived Test versions in the result.
+#   testTypeId: to filter Test versions by Test Type
+testVersions(limit: Int!, start: Int, archived: Boolean, testTypeId: String): TestVersionResults 
+
+#   List of Xray History results for the issue
+# 
+# Arguments
+#   limit: the maximum amount of entries to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+history(limit: Int!, start: Int): XrayHistoryResults 
+
+#   Extra Jira information of the Precondition Issue.
+# 
+# Arguments
+#   fields: list of the fields to be displayed.
+#   Check the field 'fields' of this Jira endpoint for more information.
+jira(fields: [String]): JSON 
+
+#   Date when the precondition was last modified.
+lastModified: String 
+
+#   Test Repository folder of the Precondition.
+folder: Folder 
+
+}
+
+input PreconditionFolderSearchInput {
+2#   Path of the Folder.
+path: String!
+5#   Whether descendant folders should be included in the search.
+includeDescendants: Boolean
+}
+
+type PreconditionResults {
+
+#   Total amount of issues.
+total: Int 
+
+#   Index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   Maximum amount of Preconditions to be returned. The maximum is 100.
+limit: Int 
+
+#   Precondition issue results.
+results: [Precondition] 
+
+}
+
+type ProjectSettings {
+
+#   Project id.
+projectId: String 
+
+#   Test Environments.
+testEnvironments: [String] 
+
+#   Test Coverage Settings.
+testCoverageSettings: ProjectSettingsTestCoverage 
+
+#   Defect Issue Types.
+defectIssueTypes: [String] 
+
+#   Test Type Settings.
+testTypeSettings: ProjectSettingsTestType 
+
+#   Test Step Settings.
+testStepSettings: ProjectSettingsTestStepSettings 
+
+#   Test Run Custom Fields Settings.
+testRunCustomFieldSettings: ProjectSettingsTestRunCustomFields 
+
+}
+
+type ProjectSettingsTestCoverage {
+
+#   Coverable issue type ids
+coverableIssueTypeIds: [String] 
+
+#   Epic - Issues(Stories) relation
+epicIssuesRelation: Boolean 
+
+#   Issue - Sub-tasks relation
+issueSubTasksRelation: Boolean 
+
+#   Issue Link Type Id
+issueLinkTypeId: String 
+
+#   Issue Link Type Direction
+issueLinkTypeDirection: String 
+
+}
+
+type ProjectSettingsTestRunCustomField {
+
+#   Id
+id: String 
+
+#   Name
+name: String 
+
+#   Type
+type: String 
+
+#   Is the field required
+required: Boolean 
+
+#   Values
+values: [String] 
+
+}
+
+type ProjectSettingsTestRunCustomFields {
+
+#   Fields
+fields: [ProjectSettingsTestRunCustomField] 
+
+}
+
+type ProjectSettingsTestStepField {
+
+#   Id
+id: String 
+
+#   Name
+name: String 
+
+#   Type
+type: String 
+
+#   Is the field required
+required: Boolean 
+
+#   Is the field disabled
+disabled: Boolean 
+
+#   Values
+values: [String] 
+
+}
+
+type ProjectSettingsTestStepSettings {
+
+#   Fields
+fields: [ProjectSettingsTestStepField] 
+
+}
+
+type ProjectSettingsTestType {
+
+#   Test Types
+testTypes: [TestType] 
+
+#   Default Test Type Id
+defaultTestTypeId: String 
+
+}
+
+type ProjectsSettingsResults {
+
+#   Total amount of projects.
+total: Int 
+
+#   The index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   The maximum amount of Projects to be returned. The maximum is 100.
+limit: Int 
+
+#   Project Settings results.
+results: [ProjectSettings] 
+
+#   Warnings generated during the query.
+warnings: [String] 
+
+}
+
+Mutation removeAllTestSteps {
+
+#   Mutation used to remove all Steps from a Test.
+# 
+# 
+# Arguments
+#   issueId: the id of the Step.
+#   versionId: the id of a Test version. If not given, will update the default Test version.
+removeAllTestSteps(issueId: String!, versionId: Int): String 
+
+}
+
+Mutation removeDefectsFromTestRun {
+
+#   Mutation used to remove defects from a Test Run.
+# 
+# Arguments
+#   id: the id of the Test Run.
+#   issues: the ids or keys of the defects to remove from the Test Run.
+removeDefectsFromTestRun(id: String!, issues: [String]!): String 
+
+}
+
+Mutation removeDefectsFromTestRunStep {
+
+#   Mutation used to remove defects from a Test Run.
+# 
+# Arguments
+#   testRunId: The id of the Test Run.
+#   stepId: the id of the Test Run Step.
+#   issues: the ids or keys of the defects.
+#   iterationRank: the rank of the iteration.
+removeDefectsFromTestRunStep(testRunId: String!, stepId: String!, issues: [String]!, iterationRank: String): RemoveDefectsResult 
+
+}
+
+type RemoveDefectsResult {
+
+#   Ids of the removed Defects.
+removedDefects: [String] 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation removeEvidenceFromTestRun {
+
+#   Mutation used to remove evidence from a Test Run.
+# 
+# Arguments
+#   id: the id of the Test Run.
+#   evidenceIds: the ids of the evidence to remove from the Test Run.
+#   evidenceFilenames: the filenames of the evidence to remove from the Test Run.
+removeEvidenceFromTestRun(id: String!, evidenceIds: [String], evidenceFilenames: [String]): RemoveEvidenceResult 
+
+}
+
+Mutation removeEvidenceFromTestRunStep {
+
+#   Mutation used to remove evidence from a Test Run Step.
+# 
+# Arguments
+#   testRunId: The id of the Test Run.
+#   stepId: the id of the Test Run Step.
+#   iterationRank: the rank of the iteration.
+#   evidenceIds: the id of the evidence.
+#   evidenceFilenames: the filename of the evidence.
+removeEvidenceFromTestRunStep(testRunId: String!, stepId: String!, iterationRank: String, evidenceIds: [String], evidenceFilenames: [String]): RemoveEvidenceResult 
+
+}
+
+type RemoveEvidenceResult {
+
+#   Ids of the removed Evidence.
+removedEvidence: [String] 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation removeIssuesFromFolder {
+
+#   Mutation used to remove issues from Folder.
+# 
+# Arguments
+#   projectId: the project id of the Folder.
+#   issueIds: the Test or Precondition ids to remove from the Folder.
+removeIssuesFromFolder(projectId: String!, issueIds: [String]!): String 
+
+}
+
+Mutation removePreconditionsFromTest {
+
+#   Mutation used to remove Preconditions from the Test.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   versionId: the id of a Test version. If not given, will update the default Test version.
+#   preconditionIssueIds: the issue ids of the Preconditions.
+removePreconditionsFromTest(issueId: String!, versionId: Int, preconditionIssueIds: [String]!): String 
+
+}
+
+Mutation removeTestEnvironmentsFromTestExecution {
+
+#   Mutation used to remove Test Environments from the Test Execution.
+# 
+# Arguments
+#   issueId: the issue id of the Test Execution.
+#   testEnvironments: the test environments to remove
+removeTestEnvironmentsFromTestExecution(issueId: String!, testEnvironments: [String]!): String 
+
+}
+
+Mutation removeTestExecutionsFromTest {
+
+#   Mutation used to remove Test Executions from the Test.
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   testExecIssueIds: the issue ids of the Test Executions.
+removeTestExecutionsFromTest(issueId: String!, testExecIssueIds: [String]!): String 
+
+}
+
+Mutation removeTestExecutionsFromTestPlan {
+
+#   Mutation used to remove Test Executions from the Test Plan.
+# 
+# Arguments
+#   issueId: the issue id of the Test Plan.
+#   testExecIssueIds: the issue ids of the Test Executions.
+removeTestExecutionsFromTestPlan(issueId: String!, testExecIssueIds: [String]!): String 
+
+}
+
+Mutation removeTestPlansFromTest {
+
+#   Mutation used to remove Test Plans from the Test.
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   testPlanIssueIds: the issue ids of the Test Plans.
+removeTestPlansFromTest(issueId: String!, testPlanIssueIds: [String]!): String 
+
+}
+
+Mutation removeTestSetsFromTest {
+
+#   Mutation used to remove Test Sets from the Test.
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   testSetIssueIds: the issue ids of the Test Sets.
+removeTestSetsFromTest(issueId: String!, testSetIssueIds: [String]!): String 
+
+}
+
+Mutation removeTestsFromFolder {
+
+#   Mutation used to remove tests from Folder.
+# 
+# Arguments
+#   projectId: the project id of the Folder.
+#   testPlanId: the Test Plan id of the Folder.
+#   testIssueIds: the Test ids to remove from the Folder.
+removeTestsFromFolder(projectId: String, testPlanId: String, testIssueIds: [String]!): String 
+
+}
+
+Mutation removeTestsFromPrecondition {
+
+#   Mutation used to remove Tests from the Precondition. One of testIssueIds or tests is required.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Precondition.
+#   testIssueIds: the issue ids of the Tests. Will remove the default Test versions. Cannot be used with tests.
+#   tests: the ids of the Test versions. Cannot be used with testIssueIds.
+removeTestsFromPrecondition(issueId: String!, testIssueIds: [String], tests: [TestWithVersionInput]): String 
+
+}
+
+Mutation removeTestsFromTestExecution {
+
+#   Mutation used to remove Tests from the Test Execution.
+# 
+# Arguments
+#   issueId: issue id of the Test Execution.
+#   testIssueIds: the ids of the Tests.
+removeTestsFromTestExecution(issueId: String!, testIssueIds: [String]!): String 
+
+}
+
+Mutation removeTestsFromTestPlan {
+
+#   Mutation used to remove Tests from the Test Plan.
+# 
+# Arguments
+#   issueId: the issue id of the Test Plan.
+#   testIssueIds: the issue ids of the Tests.
+removeTestsFromTestPlan(issueId: String!, testIssueIds: [String]!): String 
+
+}
+
+Mutation removeTestsFromTestSet {
+
+#   Mutation used to remove Tests from the Test Set.
+# 
+# Arguments
+#   issueId: the issue id of the Test Set.
+#   testIssueIds: the issue ids of the Tests.
+removeTestsFromTestSet(issueId: String!, testIssueIds: [String]!): String 
+
+}
+
+Mutation removeTestStep {
+
+#   Mutation used to remove a Step from a Test.
+# 
+# Arguments
+#   stepId: the id of the Step.
+removeTestStep(stepId: String!): String 
+
+}
+
+Mutation renameFolder {
+
+#   Mutation used to rename a Folder.
+# 
+# Arguments
+#   projectId: the project id of the Folder.
+#   testPlanId: the Test Plan id of the Folder.
+#   path: the path of the Folder.
+#   newName: the new name of the Folder.
+renameFolder(projectId: String, testPlanId: String, path: String!, newName: String!): ActionFolderResult 
+
+}
+
+Mutation resetTestRun {
+
+#   Mutation used to reset the Test Run. This will load the new test definition and delete the current execution data.
+# 
+# Arguments
+#   id: the id of the Test Run.
+resetTestRun(id: String!): String 
+
+}
+
+type Result {
+
+#   Output if exist an error or a failure (JUNIT, XUNIT, NUNIT, TESTNG)
+log: String 
+
+#   Examples of the Result.
+examples: [ResultsExample] 
+
+#   Whether or not the Result was imported.
+wasImported: String 
+
+#   Duration of the Result.
+duration: Float 
+
+#   Status of the Result.
+status: StepStatus 
+
+#   Name of the Result.
+name: String 
+
+#   Hooks of the Results.
+hooks: [ResultsStep] 
+
+#   Backgrounds of the Results.
+backgrounds: [ResultsStep] 
+
+#   Steps of the Results.
+steps: [ResultsStep] 
+
+}
+
+type ResultsEmbedding {
+
+#   Filename of the Embedding.
+filename: String 
+
+#   Mime Type of the Embedding.
+mimeType: String 
+
+#   Data of the Embedding. Base64 format.
+data: String 
+
+#   Link to download the embedding if no data is present
+downloadLink: String 
+
+}
+
+type ResultsExample {
+
+#   Whether or not the Result was imported.
+wasImported: String 
+
+#   Duration of the Result.
+duration: Float 
+
+#   Status of the Result.
+status: StepStatus 
+
+#   Hooks of the Results.
+hooks: [ResultsStep] 
+
+#   Backgrounds of the Results.
+backgrounds: [ResultsStep] 
+
+#   Steps of the Results.
+steps: [ResultsStep] 
+
+}
+
+type ResultsStep {
+
+#   If a gherkin step, keyword of the gherkin step.
+keyword: String 
+
+#   Name of the step.
+name: String 
+
+#   Embeddings of the step.
+embeddings: [ResultsEmbedding] 
+
+#   Duration of the step.
+duration: Float 
+
+#   Error of the step.
+error: String 
+
+#   Status of the step.
+status: StepStatus 
+
+#   If a Robot step, output of the Robot step.
+log: String 
+
+}
+
+Mutation setTestRunTimer {
+
+#   Mutation used to set the timer in Test Run. This will start, pause or stop the timer in Test Run.
+# 
+# Arguments
+#   testRunId: the id of the Test Run.
+#   running: to start (true) or pause (false) the timer
+#   reset: to stop the timer
+setTestRunTimer(testRunId: String!, running: Boolean, reset: Boolean): String 
+
+}
+
+type SimpleFolderResults {
+
+#   Folder name
+name: String 
+
+#   Folder path
+path: String 
+
+#   Folder tests count
+testsCount: Int 
+
+#   Folder preconditions count
+preconditionsCount: Int 
+
+#   Folder issues count
+issuesCount: Int 
+
+}
+
+directive @skip(if: Boolean!) on FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+type Status {
+
+#   Name of the Status.
+name: String 
+
+#   Description of the Status.
+description: String 
+
+#   Whether the Status is final or not.
+final: Boolean 
+
+#   Color of the Status.
+color: String 
+
+#   Coverage mapping of the Status.
+coverageStatus: String 
+
+}
+
+type Step {
+
+#   Id of the Step.
+id: String 
+
+#   Id of the Lib Step Library
+libStepId: String 
+
+#   Action of the Step.
+action: String 
+
+#   Data of the Step.
+data: String 
+
+#   Result of the Step.
+result: String 
+
+#   Attachments of the Step.
+attachments: [Attachment] 
+
+#   Custom Fields of the Step.
+customFields: [CustomStepField] 
+
+#   The issue id of the test being called in the step.
+callTestIssueId: String 
+
+#   Call Test Parameter Assignments of the Step.
+callTestParameterAssignments: [CallTestParameterAssignment] 
+
+}
+
+type StepStatus {
+
+#   Name of the Status.
+name: String 
+
+#   Description of the Status.
+description: String 
+
+#   Color of the Status.
+color: String 
+
+#   The test status to which the step status is mapped to.
+testStatus: Status 
+
+}
+
+scalar String
+
+type Test {
+
+#   Issue id of the Test issue.
+issueId: String 
+
+#   Project id of the Test issue.
+projectId: String 
+
+#   Test type of the Test issue.
+testType: TestType 
+
+#   Step definition of the Test issue.
+steps: [Step] 
+
+#   Unstructured definition of the Test issue.
+unstructured: String 
+
+#   Gherkin definition of the Test issue.
+gherkin: String 
+
+#   Test Repository folder of the Test.
+folder: Folder 
+
+#   Dataset linked to the Test issue.
+dataset: Dataset 
+
+#   Gherkin type of the Test issue.
+#   Possible values: 'scenario' or 'scenario_outline'.
+scenarioType: String 
+
+#   List of Precondition associated with the Test issue.
+# 
+# Arguments
+#   issueIds: the ids of the Preconditions.
+#   limit: the maximum amount of Preconditions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+preconditions(issueIds: [String], limit: Int!, start: Int): PreconditionResults 
+
+#   List of Test Sets associated with the Test issue.
+# 
+# Arguments
+#   issueIds: the issue ids of the Test Sets
+#   limit: the maximum amount of Test Sets to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testSets(issueIds: [String], limit: Int!, start: Int): TestSetResults 
+
+#   List of Test Plans associated with the Test issue.
+# 
+# Arguments
+#   issueIds: the issue ids of the Test Plans
+#   limit: the maximum amount of Test Plans to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testPlans(issueIds: [String], limit: Int!, start: Int): TestPlanResults 
+
+#   List of Test Executions associated with the Test issue.
+# 
+# Arguments
+#   issueIds: the issue ids of the Test Executions
+#   limit: the maximum amount of Test Executions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testExecutions(issueIds: [String], limit: Int!, start: Int): TestExecutionResults 
+
+#   List of Test Runs for the Test issue
+# 
+# Arguments
+#   limit: the maximum amount of Test Runs to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testRuns(limit: Int!, start: Int): TestRunResults 
+
+#   List of Xray History results for the issue
+# 
+# Arguments
+#   limit: the maximum amount of entries to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+history(limit: Int!, start: Int): XrayHistoryResults 
+
+#   List of Test versions of the Test
+# 
+# Arguments
+#   limit: the maximum amount of Test versions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+#   archived: if should include archived Test versions in the result.
+#   testTypeId: to filter Test versions by Test Type
+testVersions(limit: Int!, start: Int, archived: Boolean, testTypeId: String): TestVersionResults 
+
+#   List of Coverable Issues associated with the Test issue
+# 
+# Arguments
+#   issueIds: the issue ids of the Coverable Issues
+#   limit: the maximum amount of Coverable Issues to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+coverableIssues(issueIds: [String], limit: Int!, start: Int): CoverableIssueResults 
+
+#   Extra Jira information of the Test issue.
+# 
+# Arguments
+#   fields: List of the fields to be displayed.
+#   Check the field 'fields' of this Jira endpoint for more information.
+jira(fields: [String]): JSON! 
+
+#   Status of the Test. This status can be calculated based on latest status, version or Test Plan.
+# 
+# Arguments
+#   environment: the environment for which to calculate the for status.
+#   isFinal: whether the final statuses has precedence over non-final.
+#   version: the version name for which to calculate the status for.
+#   testPlan: the Test Plan id for which to calculate the status for.
+status(environment: String, isFinal: Boolean, version: String, testPlan: String): TestStatusType 
+
+#   Date when the test was last modified.
+lastModified: String 
+
+}
+
+type TestExecution {
+
+#   Id of the Test Execution issue.
+issueId: String 
+
+#   Project id of the Test Execution issue.
+projectId: String 
+
+#   Test Environments of the Test Execution.
+testEnvironments: [String] 
+
+#   List of Tests associated with the Test Execution Issue.
+# 
+# Arguments
+#   issueIds: the issue ids of the Tests.
+#   limit: the maximum amount of tests to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+tests(issueIds: [String], limit: Int!, start: Int): TestResults 
+
+#   List of Test Plans associated with the Test Execution Issue.
+# 
+# Arguments
+#   issueIds: Ids of the Test Plans.
+#   limit: the maximum amount of Test Plans to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testPlans(issueIds: [String], limit: Int!, start: Int): TestPlanResults 
+
+#   List of Test Runs for the Test Execution Issue.
+# 
+# Arguments
+#   limit: the maximum amount of tests to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testRuns(limit: Int!, start: Int): TestRunResults 
+
+#   List of Xray History results for the issue
+# 
+# Arguments
+#   limit: the maximum amount of entries to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+history(limit: Int!, start: Int): XrayHistoryResults 
+
+#   Extra Jira information of the Test Execution Issue.
+# 
+# Arguments
+#   fields: List of the fields to be displayed.
+#   Check the field 'fields' of this Jira endpoint for more information.
+jira(fields: [String]): JSON 
+
+#   Date when the test exec was last modified.
+lastModified: String 
+
+}
+
+type TestExecutionResults {
+
+#   Total amount of issues.
+total: Int 
+
+#   Index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   Maximum amount of Test Executions to be returned. The maximum is 100.
+limit: Int 
+
+#   Test Execution issue results.
+results: [TestExecution] 
+
+}
+
+type TestPlan {
+
+#   Id of the Test Plan issue.
+issueId: String 
+
+#   Project id of the Test Plan issue.
+projectId: String 
+
+#   List of Tests associated with the Test Plan issue.
+# 
+# Arguments
+#   issueIds: the issue ids of the Tests.
+#   limit: the maximum amount of tests to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+tests(issueIds: [String], limit: Int!, start: Int): TestResults 
+
+#   List of Test Executions associated with the Test Plan issue.
+# 
+# Arguments
+#   issueIds: issue ids of the Test Executions.
+#   limit: the maximum amount of tests to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testExecutions(issueIds: [String], limit: Int!, start: Int): TestExecutionResults 
+
+#   List of Xray History results for the issue
+# 
+# Arguments
+#   limit: the maximum amount of entries to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+history(limit: Int!, start: Int): XrayHistoryResults 
+
+#   Extra Jira information of the Test Plan issue.
+# 
+# Arguments
+#   fields: list of the fields to be displayed.
+#   Check the field 'fields' of this Jira endpoint for more information.
+jira(fields: [String]): JSON 
+
+#   Folder structure of the Test Plan.
+folders: FolderResults 
+
+#   Date when the test plan was last modified.
+lastModified: String 
+
+}
+
+type TestPlanResults {
+
+#   Total amount of issues.
+total: Int 
+
+#   Index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   Maximum amount of Test Plans to be returned. The maximum is 100.
+limit: Int 
+
+#   Test Plan issue results.
+results: [TestPlan] 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+type TestResults {
+
+#   Total amount of issues.
+total: Int 
+
+#   The index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   The maximum amount of Tests to be returned. The maximum is 100.
+limit: Int 
+
+#   Test issue results.
+results: [Test] 
+
+#   Warnings generated if you have a invalid Test
+warnings: [String] 
+
+}
+
+type TestRun {
+
+#   Id of the Test Run.
+id: String 
+
+#   Status of the Test Run.
+status: Status 
+
+#   Generic definition of the Test issue.
+unstructured: String 
+
+#   Cucumber definition of the Test issue.
+gherkin: String 
+
+#   Cucumber Type definition of the Test Run.
+scenarioType: String 
+
+#   Comment definition of the Test Run.
+comment: String 
+
+#   Started On date of the Test Run.
+startedOn: String 
+
+#   Evidence of the Test Run.
+evidence: [Evidence] 
+
+#   Defects of the Test Run.
+defects: [String] 
+
+#   Step definition of the Test Run.
+steps: [TestRunStep] 
+
+#   Examples of the Test Run.
+examples: [Example] 
+
+#   Results of the Test Run.
+results: [Result] 
+
+#   Test Type of the Test Run.
+testType: TestType 
+
+#   User's account id that executed the Test Run.
+executedById: String 
+
+#   User's account id assigned to the Test Run. This is user assigned to the Test Run, not taking into account the assignee of the test execution.
+assigneeId: String 
+
+#   Finished On date of the Test Run.
+finishedOn: String 
+
+#   Preconditions of the Test Run.
+# 
+# Arguments
+#   limit: the maximum amount of Preconditions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+preconditions(limit: Int!, start: Int): TestRunPreconditionResults 
+
+#   Test of the Test Run.
+test: Test 
+
+#   Test version of the Test Run.
+testVersion: TestVersion 
+
+#   Test Execution of the Test Run.
+testExecution: TestExecution 
+
+#   Date when the test run was last modified.
+lastModified: String 
+
+#   Custom Fields of the Test Run.
+customFields: [TestRunCustomFieldValue] 
+
+#   Parameters of the Test Run.
+parameters: [TestRunParameter] 
+
+#   Iterations of the Test Run.
+# 
+# Arguments
+#   limit: the maximum amount of iterations to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+iterations(limit: Int!, start: Int): TestRunIterationResults 
+
+}
+
+type TestRunCustomFieldValue {
+
+id: String 
+
+name: String 
+
+values: JSON 
+
+}
+
+type TestRunCustomStepField {
+
+#   Id of the Custom Field.
+id: String 
+
+#   Name of the Custom Field.
+name: String 
+
+#   Value of the Custom Field.
+value: JSON 
+
+}
+
+input TestRunDefectOperationsInput {
+2#   Defects to add to the Test Run Step.
+add: [String]
+5#   Defects to remove from the Test Run Step.
+remove: [String]
+}
+
+input TestRunEvidenceOperationsInput {
+2#   Evidence to add to the Test Run Step.
+add: [AttachmentDataInput]
+5#   Evidence ids to remove from the Test Run Step.
+removeIds: [String]
+8#   Evidence filenames to remove from the Test Run Step.
+removeFilenames: [String]
+}
+
+type TestRunIteration {
+
+#   Rank of the iteration.
+rank: String 
+
+#   Parameters of the iteration.
+parameters: [TestRunParameter] 
+
+#   Status of the iteration.
+status: StepStatus 
+
+#   Step results of the iteration.
+# 
+# Arguments
+#   limit: the maximum amount of step results to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+stepResults(limit: Int!, start: Int): TestRunIterationStepResults 
+
+}
+
+type TestRunIterationResults {
+
+#   Total amount of iterations.
+total: Int 
+
+#   Index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   Maximum amount of iterations to be returned. The maximum is 100.
+limit: Int 
+
+#   Iteration results.
+results: [TestRunIteration] 
+
+}
+
+type TestRunIterationStepResult {
+
+#   Id of the Test Run step.
+id: String 
+
+#   Status of the Test Run step.
+status: StepStatus 
+
+#   Comment of the Test Run step.
+comment: String 
+
+#   Evidence of the Test Run step.
+evidence: [Evidence] 
+
+#   Defects of the Test Run step.
+defects: [String] 
+
+#   Actual Result of the Test Run step.
+actualResult: String 
+
+}
+
+type TestRunIterationStepResults {
+
+#   Total amount of steps.
+total: Int 
+
+#   Index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   Maximum amount of step results to be returned. The maximum is 100.
+limit: Int 
+
+#   Step results.
+results: [TestRunIterationStepResult] 
+
+}
+
+type TestRunParameter {
+
+name: String 
+
+value: String 
+
+}
+
+type TestRunPrecondition {
+
+#   Precondition of the Test Run.
+preconditionRef: Precondition 
+
+#   Precondition definition.
+definition: String 
+
+}
+
+type TestRunPreconditionResults {
+
+#   Total amount of preconditions.
+total: Int 
+
+#   Index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   Maximum amount of Preconditions to be returned. The maximum is 100.
+limit: Int 
+
+#   Precondition results.
+results: [TestRunPrecondition] 
+
+}
+
+type TestRunResults {
+
+#   Total amount of Test Runs.
+total: Int 
+
+#   The index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   The maximum amount of Test Runs to be returned. The maximum is 100.
+limit: Int 
+
+#   Test Run results.
+results: [TestRun] 
+
+}
+
+type TestRunStep {
+
+#   Id of the Test Run Step.
+id: String 
+
+#   Status of the Test Run Step.
+status: StepStatus 
+
+#   Action of the Test Run Step.
+action: String 
+
+#   Data of the Test Run Step.
+data: String 
+
+#   Result of the Test Run Step.
+result: String 
+
+#   Custom Fields of the Test Run Step.
+customFields: [TestRunCustomStepField] 
+
+#   Comment of the Test Run Step.
+comment: String 
+
+#   Evidence of the Test Run Step.
+evidence: [Evidence] 
+
+#   Attachments of the Test Run Step.
+attachments: [Attachment] 
+
+#   Defects of the Test Run Step.
+defects: [String] 
+
+#   Actual Result of the Test Run Step.
+actualResult: String 
+
+}
+
+type TestSet {
+
+#   Issue id of the Test Set Issue.
+issueId: String 
+
+#   Project id of the Test Set Issue.
+projectId: String 
+
+#   List of Tests associated with the Test Set Issue.
+# 
+# Arguments
+#   issueIds: Ids of the Tests.
+#   limit: Maximum amount of tests to be returned. The maximum is 100.
+#   start: Index of the first item to return in the page of results (page offset).
+tests(issueIds: [String], limit: Int!, start: Int): TestResults 
+
+#   List of Xray History results for the issue
+# 
+# Arguments
+#   limit: the maximum amount of entries to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+history(limit: Int!, start: Int): XrayHistoryResults 
+
+#   Extra Jira information of the Test Set Issue.
+# 
+# Arguments
+#   fields: List of the fields to be displayed.
+#   Check the field 'fields' of this Jira endpoint for more information.
+jira(fields: [String]): JSON 
+
+#   Date when the test set was last modified.
+lastModified: String 
+
+}
+
+type TestSetResults {
+
+#   Total amount of issues.
+total: Int 
+
+#   Index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   Maximum amount of test sets to be returned. The maximum is 100.
+limit: Int 
+
+#   Test Set issue results.
+results: [TestSet] 
+
+}
+
+type TestStatusType {
+
+#   Name of the Test Status.
+name: String 
+
+#   Description of the Test Status.
+description: String 
+
+#   Whether the status is final or not.
+final: Boolean 
+
+#   Color of the Test Status.
+color: String 
+
+}
+
+type TestType {
+
+#   Id of the Test Type.
+id: String 
+
+#   Name of the Test Type.
+name: String 
+
+#   Kind of the Test Type.
+#   Possible values are "Gherkin", "Steps" or "Unstructured".
+kind: String 
+
+}
+
+input TestTypeInput {
+2#   Id of the Test Type.
+id: String
+5#   Name of the Test Type.
+name: String
+8#   Kind of the Test Type.
+#   Possible values are "Gherkin", "Steps" or "Unstructured".
+kind: String
+}
+
+type TestVersion {
+
+#   Number of the Test version.
+id: Int! 
+
+#   Name of the Test version.
+name: String! 
+
+#   If is the default Test version.
+default: Boolean! 
+
+#   If is an archived Test version.
+archived: Boolean! 
+
+#   Test type of the Test version.
+testType: TestType 
+
+#   Step definition of the Test version.
+steps: [Step] 
+
+#   Unstructured definition of the Test version.
+unstructured: String 
+
+#   Gherkin definition of the Test version.
+gherkin: String 
+
+#   Gherkin type of the Test version.
+#   Possible values: 'scenario' or 'scenario_outline'.
+scenarioType: String 
+
+test: Test! 
+
+# Arguments
+#   issueIds: the ids of the Preconditions.
+#   limit: the maximum amount of Preconditions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+preconditions(issueIds: [String], limit: Int!, start: Int): PreconditionResults 
+
+#   List of Test Executions associated with the Test version.
+# 
+# Arguments
+#   issueIds: the issue ids of the Test Executions
+#   limit: the maximum amount of Test Executions to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testExecutions(issueIds: [String], limit: Int!, start: Int): TestExecutionResults 
+
+# Arguments
+#   limit: the maximum amount of Test Runs to be returned. The maximum is 100.
+#   start: the index of the first item to return in the page of results (page offset).
+testRuns(limit: Int!, start: Int): TestRunResults 
+
+#   Date when the Test version was last modified.
+lastModified: String 
+
+}
+
+type TestVersionResults {
+
+#   Total amount of Test versions.
+total: Int 
+
+#   The index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   The maximum amount of Test versions to be returned. The maximum is 100.
+limit: Int 
+
+#   Test version results.
+results: [TestVersion] 
+
+}
+
+input TestWithVersionInput {
+2#   Issue id of the Test issue.
+issueId: String
+5#   Test Version id of the Test Issue
+versionId: Int
+}
+
+Mutation updateGherkinTestDefinition {
+
+#   Mutation used to update the Gherkin definition of a Test.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   versionId: the id of a Test version. If not given, will update the default Test version.
+#   gherkin: the gherkin definition of the Test.
+updateGherkinTestDefinition(issueId: String!, versionId: Int, gherkin: String!): Test 
+
+}
+
+Mutation updateIterationStatus {
+
+#   Mutation used to update the status of a Test Run iteration.
+# 
+# Arguments
+#   testRunId: The id of the Test Run.
+#   iterationRank: The rank of the iteration.
+#   status: the id or name of the status of the iteration.
+updateIterationStatus(testRunId: String!, iterationRank: String!, status: String!): UpdateIterationStatusResult 
+
+}
+
+type UpdateIterationStatusResult {
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation updatePrecondition {
+
+#   Mutation used to update a Precondition
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Precondition.
+#   data: the object containing the information to update the Precondition.
+updatePrecondition(issueId: String!, data: UpdatePreconditionInput): Precondition 
+
+}
+
+Mutation updatePreconditionFolder {
+
+#   Mutation used update the precondition folder on the Test Repository.
+# 
+# Arguments
+#   issueId: the issue id of the Precondition.
+#   folderPath: the Test repository folder for the Precondition.
+updatePreconditionFolder(issueId: String!, folderPath: String!): String 
+
+}
+
+input UpdatePreconditionInput {
+2#   Precondition type of the Precondition Issue.
+preconditionType: UpdatePreconditionTypeInput
+5#   Definition of the Precondition Issue.
+definition: String
+8#   the repository path to which the Precondition should be moved to
+folderPath: String
+}
+
+input UpdatePreconditionTypeInput {
+2#   Id of the Precondition Type.
+id: String
+5#   Name of the Precondition Type.
+name: String
+}
+
+input UpdateStepInput {
+2#   Action of the Step.
+action: String
+5#   Data of the Step.
+data: String
+8#   Result of the Step.
+result: String
+11#   Attachments of the Step.
+attachments: AttachmentOperationsInput
+14#   Custom Fields of the Step
+customFields: [CustomStepFieldInput]
+}
+
+Mutation updateTestFolder {
+
+#   Mutation used update the Test folder on the Test Repository.
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   folderPath: the Test repository folder for the Test.
+updateTestFolder(issueId: String!, folderPath: String!): String 
+
+}
+
+Mutation updateTestRun {
+
+#   Mutation used to update a Test Run.
+# 
+# Arguments
+#   id: the id of the Test Run.
+#   comment: the comment of the Test Run.
+#   startedOn: the startedOn of the Test Run.
+#   finishedOn: the finishedOn of the Test Run.
+#   assigneeId: the assignee of the Test Run.
+#   executedById: the executedBy of the Test Run.
+#   customFields: the customFields of the Test Run.
+updateTestRun(id: String!, comment: String, startedOn: String, finishedOn: String, assigneeId: String, executedById: String, customFields: [CustomFieldInput]): UpdateTestRunResult 
+
+}
+
+Mutation updateTestRunComment {
+
+#   Mutation used to update the comment of a Test Run.
+# 
+# Arguments
+#   id: the id of the Test Run.
+#   comment: the comment of the Test Run.
+updateTestRunComment(id: String!, comment: String!): String 
+
+}
+
+Mutation updateTestRunExampleStatus {
+
+#   Mutation used to update the status of a Test Run Example.
+# 
+# Arguments
+#   exampleId: the id of the Test Run Example.
+#   status: the id or name of the status of the Test Run.
+updateTestRunExampleStatus(exampleId: String!, status: String!): UpdateTestRunExampleStatusResult 
+
+}
+
+type UpdateTestRunExampleStatusResult {
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+type UpdateTestRunResult {
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation updateTestRunStatus {
+
+#   Mutation used to update the status of a Test Run.
+# 
+# Arguments
+#   id: the id of the Test Run.
+#   status: the id or name of the status of the Test Run.
+updateTestRunStatus(id: String!, status: String!): String 
+
+}
+
+Mutation updateTestRunStep {
+
+#   Mutation used to update the Test Run Step.
+# 
+# Arguments
+#   testRunId: The id of the Test Run.
+#   stepId: the id of the Test Run Step.
+#   updateData: the update information.
+#   iterationRank: the rank of the iteration.
+updateTestRunStep(testRunId: String!, stepId: String!, updateData: UpdateTestRunStepInput!, iterationRank: String): UpdateTestRunStepResult 
+
+}
+
+Mutation updateTestRunStepComment {
+
+#   Mutation used to update the comment of a Test Run Step.
+# 
+# Arguments
+#   testRunId: The id of the Test Run.
+#   stepId: the id of the Test Run Step.
+#   comment: the comment of the Test Run Step.
+#   iterationRank: the rank of the iteration.
+updateTestRunStepComment(testRunId: String!, stepId: String!, comment: String!, iterationRank: String): String 
+
+}
+
+input UpdateTestRunStepInput {
+2#   Comment to add to the Test Run Step.
+comment: String
+5#   Status to set to the Test Run Step.
+status: String
+8#   Evidence of the Test Run Step.
+evidence: TestRunEvidenceOperationsInput
+11#   Defects of the Test Run Step.
+defects: TestRunDefectOperationsInput
+14#   Actual Result of the Test Run Step.
+actualResult: String
+}
+
+type UpdateTestRunStepResult {
+
+#   Ids of the added Defects.
+addedDefects: [String] 
+
+#   Ids of the removed Defects.
+removedDefects: [String] 
+
+#   Ids of the added Evidence.
+addedEvidence: [String] 
+
+#   Ids of the removed Evidence.
+removedEvidence: [String] 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation updateTestRunStepStatus {
+
+#   Mutation used to update the status of a Test Run Step.
+# 
+# Arguments
+#   testRunId: The id of the Test Run.
+#   stepId: the id of the Test Run Step.
+#   status: the id or name of the status of the Test Run.
+#   iterationRank: the rank of the iteration.
+updateTestRunStepStatus(testRunId: String!, stepId: String!, status: String!, iterationRank: String): UpdateTestRunStepStatusResult 
+
+}
+
+type UpdateTestRunStepStatusResult {
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation updateTestStep {
+
+#   Mutation used to update a Step of a Test.
+# 
+# Arguments
+#   stepId: the id of the Step.
+#   step: the information to update on the Step.
+updateTestStep(stepId: String!, step: UpdateStepInput!): UpdateTestStepResult 
+
+}
+
+type UpdateTestStepResult {
+
+#   List of added attachments.
+addedAttachments: [String] 
+
+#   List of removed attachments.
+removedAttachments: [String] 
+
+#   Warnings generated during the operation.
+warnings: [String] 
+
+}
+
+Mutation updateTestType {
+
+#   Mutation used to update the Test Type of a Test.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   versionId: the id of a Test version. If not given, will update the default Test version.
+#   testType: the Test Type to update on the Test.
+updateTestType(issueId: String!, versionId: Int, testType: UpdateTestTypeInput!): Test 
+
+}
+
+input UpdateTestTypeInput {
+2#   Id of the Test Type.
+id: String
+5#   Name of the Test Type.
+name: String
+}
+
+Mutation updateUnstructuredTestDefinition {
+
+#   Mutation used to update the Unstructured definition of a Test.
+# 
+# 
+# Arguments
+#   issueId: the issue id of the Test.
+#   versionId: the id of a Test version. If not given, will update the default Test version.
+#   unstructured: the unstructured definition of the Test.
+updateUnstructuredTestDefinition(issueId: String!, versionId: Int, unstructured: String!): Test 
+
+}
+
+type XrayHistoryEntry {
+
+#   Test Version that the changes refer to (if applicable).
+version: String 
+
+#   User that performed the change(s).
+user: String 
+
+#   Date of change(s).
+date: String 
+
+#   Action performed.
+action: String 
+
+#   Details of the change(s).
+changes: [Changes] 
+
+}
+
+type XrayHistoryResults {
+
+#   Total amount of issues.
+total: Int 
+
+#   Index of the first item to return in the page of results (page offset).
+start: Int 
+
+#   Maximum amount of History results to be returned. The maximum is 100.
+limit: Int 
+
+#   Precondition issue results.
+results: [XrayHistoryEntry] 
+
+}
