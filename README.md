@@ -116,7 +116,21 @@ claude mcp add --transport http xray https://xray-mcp.example.com/mcp \
   --header "X-Xray-Client-Id: ..." --header "X-Xray-Client-Secret: ..."
 ```
 
-Docker: `docker compose up` builds the `production` image and reads the variables from `.env`.
+### Docker
+
+Every release is published to `ghcr.io/netcare-io/jira-xray-cloud-mcp` as `<version>`,
+`<major>.<minor>` and `latest`:
+
+```bash
+# HTTP, every user brings their own API key
+docker run --rm -p 8000:8000 -e XRAY_AUTH_MODE=headers ghcr.io/netcare-io/jira-xray-cloud-mcp:latest \
+  fastmcp run server.py:mcp --transport http --host 0.0.0.0 --port 8000
+
+# stdio, e.g. as the command of a local MCP client
+docker run --rm -i -e XRAY_CLIENT_ID=... -e XRAY_CLIENT_SECRET=... ghcr.io/netcare-io/jira-xray-cloud-mcp:latest
+```
+
+`docker compose up` builds the `production` image locally and reads the variables from `.env`.
 
 ## Development
 
@@ -128,6 +142,11 @@ pytest
 The tests run the server in memory against a fake Xray (`httpx2.MockTransport`), and over the in-process
 HTTP stack for header credentials. Every GraphQL document a tool sends is validated, together with its
 variables, against the bundled Xray schema. A test also fails when a tool is added without a test case.
+
+`main` only accepts pull requests. CI runs `pytest` on Python 3.12 and 3.13 and builds the Docker image
+for every PR. To release, run `scripts/release.sh <version>`: the first run opens a PR that bumps the
+version, and a second run on `main` after the merge pushes the `v<version>` tag, which publishes the
+image and creates the GitHub release.
 Notes for coding agents are in [AGENTS.md](AGENTS.md). Xray API docs:
 [REST API v2](https://docs.getxray.app/space/XRAYCLOUD/44565892/REST+API),
 [GraphQL API](https://docs.getxray.app/space/XRAYCLOUD/44568019).

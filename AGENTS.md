@@ -28,6 +28,8 @@ xray_mcp/toolsets/_common.py  XRAY dependency (binds header credentials), shared
 xray_mcp/xray_schema.graphql  Xray GraphQL schema (graphdoc format, package data; used by
                            xray_graphql_schema and by the tests)
 tests/                     pytest suite against a fake Xray (see Testing)
+.github/workflows/         ci.yml (PRs, main), release.yml (v* tags), see CI and releases
+scripts/                   release.sh, docker-build-and-publish.sh (Harbor), run-inspector.sh
 .agent/                    local copies of third-party reference docs (see below). Git-ignored.
 ```
 
@@ -124,6 +126,20 @@ https://github.com/Xray-App/xray-postman-collections, FastMCP https://gofastmcp.
   `fastmcp.utilities.tests.asgi_client(server, headers=...)` (real HTTP stack, no port), see `tests/test_auth.py`.
 - Check a real start with:
   `XRAY_READ_ONLY=true fastmcp run server.py:mcp --transport http --port 8765` (first start takes ~5s).
+
+## CI and releases
+
+- `main` only accepts pull requests (ruleset: PR, green checks, no force push or deletion). Work on a branch.
+- `.github/workflows/ci.yml` runs on every PR and push to main: `pytest` on Python 3.12 and 3.13, and a
+  build of the Docker `production` stage (not pushed). Its job names are the ruleset's required checks,
+  so renaming a job means updating the ruleset.
+- `.github/workflows/release.yml` runs on `v*` tags. It checks that the tag is on main and equals
+  `v` + `version` from pyproject.toml, runs pytest, pushes the image to
+  `ghcr.io/netcare-io/jira-xray-cloud-mcp` (`<version>`, `<major>.<minor>`, `latest`) and creates the
+  GitHub release.
+- `scripts/release.sh <version>`: the first run opens a version-bump PR; after it is merged, the second
+  run on main pushes the tag. `scripts/docker-build-and-publish.sh` pushes to the internal Harbor
+  (`harbor.netcare.local`, not reachable from GitHub runners) by hand.
 
 ## Gotchas
 
